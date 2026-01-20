@@ -11,64 +11,91 @@
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 15px; }
         .container { max-width: 500px; margin: auto; }
         
-        /* Glowing Header Style */
-        .header { text-align: center; padding: 30px 0 20px; }
+        .clock-container {
+            background: #fff;
+            padding: 15px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(226, 19, 110, 0.2);
+            border-top: 4px solid var(--primary);
+            width: 90%;
+        }
+        .clock-time { display: block; font-size: 32px; font-weight: 900; color: var(--primary); }
+        .clock-date { display: block; font-size: 15px; color: #333; font-weight: bold; margin: 5px 0; }
+        .bangla-season { 
+            display: inline-block; background: var(--primary); color: white; 
+            padding: 3px 12px; border-radius: 50px; font-size: 13px; font-weight: bold;
+        }
+
+        .header { text-align: center; padding: 10px 0; }
         .header h1 { 
-            font-size: 40px; margin: 0; color: #fff; text-transform: uppercase;
-            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
+            font-size: 45px; margin: 0; color: #fff; text-transform: uppercase;
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
             animation: glow 1.5s ease-in-out infinite alternate;
         }
+        .designer-tag {
+            font-size: 18px; color: #333; font-weight: bold; margin-top: 5px;
+            letter-spacing: 1px; text-transform: uppercase; display: block;
+        }
+        
         @keyframes glow {
             from { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
-            to { text-shadow: 0 0 20px var(--primary), 0 0 30px #ff4d94, 0 0 50px var(--primary); }
+            to { text-shadow: 0 0 20px var(--primary), 0 0 40px #ff4d94; }
         }
-        .header p { color: #555; font-size: 15px; margin-top: 10px; font-weight: 500; line-height: 1.4; }
-
+        
+        .header p { color: #555; font-size: 14px; margin-top: 15px; line-height: 1.5; }
         .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border-top: 5px solid var(--primary); }
         .card.complain-card { border-top-color: var(--secondary); }
         .card.service-card { border-top-color: var(--accent); }
-        
         h3 { margin-top: 0; color: #333; display: flex; align-items: center; gap: 10px; font-size: 18px; }
-        
         .toggle-btn { background: #f8f9fa; color: #333; border: 1px solid #ddd; cursor: pointer; padding: 10px; border-radius: 8px; width: 100%; font-weight: bold; margin-bottom: 5px; }
         #serviceList, #complainForm { display: none; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
         .service-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #f9f9f9; }
         .call-btn { background: var(--accent); color: white; text-decoration: none; padding: 5px 12px; border-radius: 5px; font-size: 13px; font-weight: bold; }
-
         .payment-box { background: #fff0f6; padding: 15px; border-radius: 10px; border: 1px dashed var(--primary); margin-bottom: 20px; }
         .pay-method { font-size: 14px; margin-bottom: 8px; color: #333; }
         .pay-method b { color: var(--primary); font-size: 16px; }
         .warning-text { background: #fff3cd; color: #856404; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; border-left: 5px solid var(--warning); margin-bottom: 15px; text-align: center; }
-
         label { display: block; margin: 10px 0 5px; font-size: 13px; font-weight: 600; color: #555; }
         input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 15px; outline: none; }
         .id-hint { font-size: 11px; color: var(--primary); font-weight: bold; margin-bottom: 5px; }
-
         button { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin-top: 15px; transition: 0.3s; font-size: 16px; }
         .btn-pay { background: var(--primary); }
         .btn-comp { background: var(--secondary); }
         .btn-admin { background: #555; margin-top: 30px; opacity: 0.6; font-size: 14px; }
-        
         #adminDashboard { display: none; max-width: 1200px; margin: auto; padding: 20px; }
         .table-wrapper { width: 100%; overflow-x: auto; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
         table { width: 100%; border-collapse: collapse; min-width: 800px; font-size: 13px; }
         th, td { border: 1px solid #eee; padding: 10px; text-align: center; }
         th { background: #333; color: white; }
-        
-        .month-highlight-btn { background: #e2136e; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 18px; margin: 20px auto; display: block; cursor: pointer; }
         #passChangeSection { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; }
         .toggle-pass-btn { background: #444; color: white; padding: 8px 15px; border-radius: 5px; font-size: 12px; cursor: pointer; border: none; margin-bottom: 10px; width: auto; }
-        #adminLogin { display: none; }
         .del-btn { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
         .section-title { background: #333; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px; text-align: center; }
+        .stats-summary { display: flex; gap: 15px; margin-bottom: 20px; justify-content: center; }
+        .stat-card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; flex: 1; border-bottom: 4px solid var(--primary); }
+        .stat-card span { display: block; font-size: 12px; color: #666; font-weight: bold; }
+        .stat-card b { font-size: 18px; color: var(--primary); }
+        .search-container { margin-bottom: 20px; position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 10px 0; }
+        #adminSearch { padding: 15px; border: 2px solid var(--primary); border-radius: 50px; font-weight: bold; }
+        .month-select-container { text-align: center; margin: 20px 0; }
+        #monthSelector { padding: 15px 30px; border-radius: 50px; background: var(--primary); color: white; border: none; font-size: 18px; font-weight: bold; cursor: pointer; outline: none; box-shadow: 0 4px 10px rgba(226, 19, 110, 0.3); }
     </style>
 </head>
 <body>
 
 <div class="container" id="mainContainer">
     <div class="header">
+        <div class="clock-container">
+            <span class="clock-time" id="liveTimeBN">০০:০০:০০</span>
+            <span class="clock-date" id="liveDateBN">তারিখ লোড হচ্ছে...</span>
+            <span class="bangla-season" id="banglaSeason">লোডিং...</span>
+        </div>
+        
         <h1>Am Internet</h1>
-        <p>দ্রুত গতির ইন্টারনেট সেবা ও নিরবচ্ছিন্ন সংযোগ নিশ্চিত করাই আমাদের লক্ষ্য। উন্নত কাস্টমার সাপোর্ট এবং সেরা গেমিং এক্সপেরিয়েন্স নিয়ে আমরা আছি আপনার পাশে।</p>
+        <span class="designer-tag">Design by Salman</span>
+        <p>দ্রুত গতির ইন্টারনেট সেবা ও নিরবচ্ছিন্ন সংযোগ নিশ্চিত করাই আমাদের লক্ষ্য।</p>
     </div>
 
     <div id="userPage">
@@ -76,9 +103,9 @@
             <h3>📞 কাস্টমার সাপোর্ট</h3>
             <button class="toggle-btn" onclick="toggleService()">সার্ভিস টিমের নম্বর দেখুন ▼</button>
             <div id="serviceList">
-                <div class="service-item"><span>ইঞ্জিনিয়ার ১</span> <a href="tel:01308667489" class="call-btn">কল দিন</a></div>
-                <div class="service-item"><span>ইঞ্জিনিয়ার ২</span> <a href="tel:01308667487" class="call-btn">কল দিন</a></div>
-                <div class="service-item"><span>ইঞ্জিনিয়ার ৩</span> <a href="tel:01308667490" class="call-btn">কল দিন</a></div>
+                <div class="service-item"><span>ইঞ্জিনিয়ার ১ রায়হান</span> <a href="tel:01308667489" class="call-btn">কল দিন</a></div>
+                <div class="service-item"><span>ইঞ্জিনিয়ার ২ অলি </span> <a href="tel:01308667487" class="call-btn">কল দিন</a></div>
+                <div class="service-item"><span>ইঞ্জিনিয়ার ৩ সাগর</span> <a href="tel:01308667490" class="call-btn">কল দিন</a></div>
             </div>
         </div>
 
@@ -118,7 +145,7 @@
         <button class="btn-admin" onclick="showLogin()">🔐 অ্যাডমিন লগইন</button>
     </div>
 
-    <div id="adminLogin" class="card">
+    <div id="adminLogin" class="card" style="display:none;">
         <h3>অ্যাডমিন লগইন</h3>
         <input type="text" id="adminUser" placeholder="Username">
         <input type="password" id="adminPass" placeholder="Password">
@@ -140,12 +167,30 @@
         </div>
     </div>
 
-    <button class="month-highlight-btn" id="currentMonthBtn" onclick="loadMonthData()">Loading...</button>
+    <div class="month-select-container">
+        <select id="monthSelector" onchange="loadMonthData()">
+        </select>
+    </div>
+
+    <div class="stats-summary">
+        <div class="stat-card">
+            <span>মোট বিল সংখ্যা</span>
+            <b id="totalBillCount">0</b>
+        </div>
+        <div class="stat-card">
+            <span>মোট আদায়কৃত টাকা</span>
+            <b id="totalBillAmount">0 TK</b>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="adminSearch" placeholder="🔍 আইডি, মোবাইল বা TrxID দিয়ে খুঁজুন..." onkeyup="filterData()">
+    </div>
 
     <h3 class="section-title">💳 বিল পেমেন্ট তালিকা</h3>
     <div class="table-wrapper">
         <table>
-            <thead><tr><th>তারিখ</th><th>আইডি</th><th>মোবাইল</th><th>টাকা</th><th>TrxID</th><th>অ্যাকশন</th></tr></thead>
+            <thead><tr><th>তারিখ</th><th>ইউজার আইডি</th><th>মোবাইল নম্বর</th><th>টাকার পরিমাণ</th><th>TrxID</th><th>অ্যাকশন</th></tr></thead>
             <tbody id="billTableBody"></tbody>
         </table>
     </div>
@@ -153,7 +198,7 @@
     <h3 class="section-title">⚠️ অভিযোগ তালিকা</h3>
     <div class="table-wrapper">
         <table>
-            <thead><tr><th>তারিখ</th><th>আইডি</th><th>মোবাইল</th><th>সমস্যা</th><th>বিস্তারিত</th><th>অ্যাকশন</th></tr></thead>
+            <thead><tr><th>তারিখ</th><th>ইউজার আইডি</th><th>মোাবাইল নম্বর</th><th>সমস্যার ধরন</th><th>বিস্তারিত তথ্য</th><th>অ্যাকশন</th></tr></thead>
             <tbody id="compTableBody"></tbody>
         </table>
     </div>
@@ -172,132 +217,132 @@
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const curMonth = months[new Date().getMonth()];
     
+    function updateClock() {
+        const now = new Date();
+        const timeBN = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+        const dayNamesBN = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"];
+        const monthNamesBN = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+        const day = dayNamesBN[now.getDay()];
+        const date = now.getDate().toLocaleString('bn-BD');
+        const month = monthNamesBN[now.getMonth()];
+        const year = now.getFullYear().toLocaleString('bn-BD').replace(/,/g, '');
+        document.getElementById('liveTimeBN').innerText = timeBN;
+        document.getElementById('liveDateBN').innerText = `📅 ${day}, ${date} ${month} ${year}`;
+        const m = now.getMonth();
+        if(m == 0 || m == 1) document.getElementById('banglaSeason').innerText = "মাঘ মাস | শীতকাল ❄️";
+        else document.getElementById('banglaSeason').innerText = "ফাল্গুন মাস | বসন্তকাল 🌸";
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    const monthNamesEN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const curMonthYear = monthNamesEN[new Date().getMonth()] + " " + new Date().getFullYear();
     const tgToken = "7741891698:AAHaxBEa2_utaOzOPJdGUzOcOBnxzijfH8w";
     const tgChatId = "7067123155";
 
-    function togglePassBox() {
-        const box = document.getElementById('passChangeSection');
-        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-    }
-
-    function changePassword() {
-        const newPass = document.getElementById('newPass').value;
-        if(newPass.length < 4) return alert("কমপক্ষে ৪ অক্ষর দিন!");
-        db.ref("admin_config/pass").set(newPass).then(() => {
-            alert("পাসওয়ার্ড সেভ হয়েছে!");
-            togglePassBox();
-            document.getElementById('newPass').value = "";
-        });
-    }
-
-    function toggleService() {
-        var list = document.getElementById("serviceList");
-        var btn = document.querySelector(".service-card .toggle-btn");
-        if (list.style.display === "block") { list.style.display = "none"; btn.innerHTML = "সার্ভিস টিমের নম্বর দেখুন ▼"; }
-        else { list.style.display = "block"; btn.innerHTML = "নম্বরগুলো লুকিয়ে রাখুন ▲"; }
-    }
-
-    function toggleComplain() {
-        var form = document.getElementById("complainForm");
-        var btn = document.querySelector(".complain-card .toggle-btn");
-        if (form.style.display === "block") { form.style.display = "none"; btn.innerHTML = "অভিযোগ করতে চান? এখানে ক্লিক করুন ▼"; }
-        else { form.style.display = "block"; btn.innerHTML = "ফরমটি লুকিয়ে রাখুন ▲"; }
-    }
+    function togglePassBox() { const box = document.getElementById('passChangeSection'); box.style.display = (box.style.display === 'block') ? 'none' : 'block'; }
+    function changePassword() { const newPass = document.getElementById('newPass').value; if(newPass.length < 4) return alert("কমপক্ষে ৪ অক্ষর দিন!"); db.ref("admin_config/pass").set(newPass).then(() => { alert("পাসওয়ার্ড সেভ হয়েছে!"); togglePassBox(); document.getElementById('newPass').value = ""; }); }
+    function toggleService() { var list = document.getElementById("serviceList"); var btn = document.querySelector(".service-card .toggle-btn"); if (list.style.display === "block") { list.style.display = "none"; btn.innerHTML = "সার্ভিস টিমের নম্বর দেখুন ▼"; } else { list.style.display = "block"; btn.innerHTML = "নম্বরগুলো লুকিয়ে রাখুন ▲"; } }
+    function toggleComplain() { var form = document.getElementById("complainForm"); var btn = document.querySelector(".complain-card .toggle-btn"); if (form.style.display === "block") { form.style.display = "none"; btn.innerHTML = "অভিযোগ করতে চান? এখানে ক্লিক করুন ▼"; } else { form.style.display = "block"; btn.innerHTML = "ফরমটি লুকিয়ে রাখুন ▲"; } }
 
     function submitData(type) {
-        let payload = { type: type, month: curMonth, time: new Date().toLocaleString() };
-        let tgMsg = "";
-        let inputId = "";
-        let phoneNum = "";
+        const inputId = (type === 'BILL') ? document.getElementById('payId').value : document.getElementById('compName').value;
+        const phoneNum = (type === 'BILL') ? document.getElementById('payPhone').value : document.getElementById('compPhone').value;
+        
+        // Validation check
+        if(type === 'BILL') {
+            const amt = document.getElementById('payAmount').value;
+            const trx = document.getElementById('payTrx').value;
+            if(!inputId || !phoneNum || !amt || !trx) return alert("সব ঘর পূরণ করুন!");
+        } else {
+            const msg = document.getElementById('compMsg').value;
+            if(!inputId || !phoneNum || !msg) return alert("সব ঘর পূরণ করুন!");
+        }
+
+        if (inputId.length !== 5 || !inputId.startsWith("28")) return alert("ভুল আইডি!");
+        if (phoneNum.length !== 11) return alert("ভুল মোবাইল নম্বর!");
+
+        let payload = { type: type, month: curMonthYear, time: new Date().toLocaleString(), id: inputId, phone: phoneNum };
+        let tgMsg = ""; 
 
         if(type === 'BILL') {
-            inputId = document.getElementById('payId').value;
-            phoneNum = document.getElementById('payPhone').value;
-            payload.id = inputId;
-            payload.phone = phoneNum;
             payload.amt = document.getElementById('payAmount').value;
             payload.trx = document.getElementById('payTrx').value;
-            tgMsg = `💰 নতুন পেমেন্ট!\nআইডি: ${payload.id}\nমোবাইল: ${payload.phone}\nটাকা: ${payload.amt}\nTrxID: ${payload.trx}`;
+            tgMsg = `💰 নতুন পেমেন্ট!\nআইডি: ${payload.id}\nটাকা: ${payload.amt} TK\nমোবাইল: ${payload.phone}\nTrxID: ${payload.trx}`;
         } else {
-            inputId = document.getElementById('compName').value;
-            phoneNum = document.getElementById('compPhone').value;
-            payload.id = inputId;
-            payload.phone = phoneNum;
             payload.issue = document.getElementById('compType').value;
             payload.msg = document.getElementById('compMsg').value;
             tgMsg = `⚠️ নতুন অভিযোগ!\nআইডি: ${payload.id}\nমোবাইল: ${payload.phone}\nসমস্যা: ${payload.issue}\nবিস্তারিত: ${payload.msg}`;
         }
 
-        // ID Validation (Must be exactly 5 digits and start with 28)
-        if (inputId.length !== 5 || !inputId.startsWith("28")) {
-            return alert("ভুল আইডি! আইডি অবশ্যই ৫ ডিজিটের এবং ২৮ দিয়ে শুরু হতে হবে।");
-        }
-
-        // Phone Validation (Must be exactly 11 digits)
-        if (phoneNum.length !== 11) {
-            return alert("ভুল মোবাইল নম্বর! অবশ্যই ১১ ডিজিটের নম্বর দিন।");
-        }
-
-        if(!payload.id || !payload.phone) return alert("সব ঘর পূরণ করুন!");
-
         db.ref("records").push().set(payload).then(() => { 
-            const url = `https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChatId}&text=${encodeURIComponent(tgMsg)}`;
-            fetch(url).then(() => {
-                if(type === 'COMPLAIN') alert("আমাদের সার্ভিস প্রতিনিধি শীঘ্রই যোগাযোগ করবে আপনার সাথে");
-                else alert("পেমেন্ট তথ্য সফলভাবে জমা হয়েছে!");
-                location.reload(); 
-            }).catch(() => { location.reload(); });
+            fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChatId}&text=${encodeURIComponent(tgMsg)}`)
+            .then(() => {
+                if(type === 'COMPLAIN') {
+                    alert("শীঘ্রই আমাদের সার্ভিস প্রতিনিধি আপনার সাথে যোগাযোগ করবে।");
+                } else {
+                    alert("সফল হয়েছে!");
+                }
+                location.reload();
+            });
         });
     }
 
     function showLogin() { document.getElementById('userPage').style.display = 'none'; document.getElementById('adminLogin').style.display = 'block'; }
-
     function checkLogin() {
         const u = document.getElementById('adminUser').value;
         const p = document.getElementById('adminPass').value;
         db.ref("admin_config/pass").once("value").then((snap) => {
-            let correctPass = snap.val() || "Sallu12";
-            if(u === "Sallu" && p === correctPass) {
+            if(u === "Sallu" && p === (snap.val() || "Sallu12")) {
                 document.getElementById('mainContainer').style.display = 'none';
                 document.getElementById('adminDashboard').style.display = 'block';
-                document.getElementById('currentMonthBtn').innerText = "বর্তমান মাস: " + curMonth;
-                loadMonthData();
-            } else { alert("ভুল পাসওয়ার্ড!"); }
+                initMonthSelector();
+            } else { alert("ভুল!"); }
         });
     }
-
-    function deleteRecord(key) {
-        if(confirm("আপনি কি নিশ্চিত যে এটি ডিলিট করতে চান?")) {
-            db.ref("records/" + key).remove().then(() => alert("ডিলিট হয়েছে!"));
-        }
+    function initMonthSelector() {
+        const selector = document.getElementById('monthSelector');
+        selector.innerHTML = "<option value='ALL'>All Data</option>";
+        monthNamesEN.forEach(m => {
+            let mY = m + " " + new Date().getFullYear();
+            let opt = document.createElement('option');
+            opt.value = mY; opt.innerHTML = mY;
+            if(mY === curMonthYear) opt.selected = true;
+            selector.appendChild(opt);
+        });
+        loadMonthData();
     }
-
+    function filterData() {
+        let input = document.getElementById('adminSearch').value.toLowerCase();
+        let trs = document.querySelectorAll("tbody tr");
+        trs.forEach(tr => tr.style.display = tr.textContent.toLowerCase().includes(input) ? "" : "none");
+    }
+    function deleteRecord(key) { if(confirm("ডিলিট?")) db.ref("records/" + key).remove(); }
     function loadMonthData() {
-        db.ref("records").orderByChild("month").equalTo(curMonth).on("value", (snap) => {
-            const billTable = document.getElementById('billTableBody');
-            const compTable = document.getElementById('compTableBody');
-            billTable.innerHTML = "";
-            compTable.innerHTML = "";
-            
+        const selectedMonth = document.getElementById('monthSelector').value;
+        let query = db.ref("records");
+        if (selectedMonth !== "ALL") query = query.orderByChild("month").equalTo(selectedMonth);
+        query.on("value", (snap) => {
+            document.getElementById('billTableBody').innerHTML = "";
+            document.getElementById('compTableBody').innerHTML = "";
+            let count = 0, total = 0;
             snap.forEach((child) => {
                 const d = child.val();
-                const key = child.key;
                 const tr = document.createElement("tr");
-                
                 if(d.type === 'BILL') {
-                    tr.innerHTML = `<td>${d.time}</td><td><b>${d.id}</b></td><td>${d.phone}</td><td>${d.amt} TK</td><td>${d.trx}</td><td><button class="del-btn" onclick="deleteRecord('${key}')">ডিলিট</button></td>`;
-                    billTable.prepend(tr);
+                    count++; total += Number(d.amt);
+                    tr.innerHTML = `<td>${d.time}</td><td>${d.id}</td><td>${d.phone}</td><td>${d.amt} TK</td><td>${d.trx}</td><td><button class="del-btn" onclick="deleteRecord('${child.key}')">ডিলিট</button></td>`;
+                    document.getElementById('billTableBody').prepend(tr);
                 } else {
-                    tr.innerHTML = `<td>${d.time}</td><td><b>${d.id}</b></td><td>${d.phone}</td><td>${d.issue}</td><td>${d.msg}</td><td><button class="del-btn" onclick="deleteRecord('${key}')">ডিলিট</button></td>`;
-                    compTable.prepend(tr);
+                    tr.innerHTML = `<td>${d.time}</td><td>${d.id}</td><td>${d.phone}</td><td>${d.issue}</td><td>${d.msg}</td><td><button class="del-btn" onclick="deleteRecord('${child.key}')">ডিলিট</button></td>`;
+                    document.getElementById('compTableBody').prepend(tr);
                 }
             });
+            document.getElementById('totalBillCount').innerText = count;
+            document.getElementById('totalBillAmount').innerText = total + " TK";
         });
     }
 </script>
-
 </body>
 </html>

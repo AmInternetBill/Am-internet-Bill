@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Am Internet - Customer Panel</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <style>
+        :root { --primary: #e2136e; --secondary: #128c7e; --bg: #f0f2f5; --accent: #007bff; --warning: #ffc107; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 15px; }
+        .container { max-width: 500px; margin: auto; }
+        
+        /* Glowing Header Style */
+        .header { text-align: center; padding: 30px 0 20px; }
+        .header h1 { 
+            font-size: 40px; margin: 0; color: #fff; text-transform: uppercase;
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
+            to { text-shadow: 0 0 20px var(--primary), 0 0 30px #ff4d94, 0 0 50px var(--primary); }
+        }
+        .header p { color: #555; font-size: 15px; margin-top: 10px; font-weight: 500; line-height: 1.4; }
+
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border-top: 5px solid var(--primary); }
+        .card.complain-card { border-top-color: var(--secondary); }
+        .card.service-card { border-top-color: var(--accent); }
+        
+        h3 { margin-top: 0; color: #333; display: flex; align-items: center; gap: 10px; font-size: 18px; }
+        
+        .toggle-btn { background: #f8f9fa; color: #333; border: 1px solid #ddd; cursor: pointer; padding: 10px; border-radius: 8px; width: 100%; font-weight: bold; margin-bottom: 5px; }
+        #serviceList, #complainForm { display: none; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
+        .service-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #f9f9f9; }
+        .call-btn { background: var(--accent); color: white; text-decoration: none; padding: 5px 12px; border-radius: 5px; font-size: 13px; font-weight: bold; }
+
+        .payment-box { background: #fff0f6; padding: 15px; border-radius: 10px; border: 1px dashed var(--primary); margin-bottom: 20px; }
+        .pay-method { font-size: 14px; margin-bottom: 8px; color: #333; }
+        .pay-method b { color: var(--primary); font-size: 16px; }
+        .warning-text { background: #fff3cd; color: #856404; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; border-left: 5px solid var(--warning); margin-bottom: 15px; text-align: center; }
+
+        label { display: block; margin: 10px 0 5px; font-size: 13px; font-weight: 600; color: #555; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 15px; outline: none; }
+        .id-hint { font-size: 11px; color: var(--primary); font-weight: bold; margin-bottom: 5px; }
+
+        button { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; margin-top: 15px; transition: 0.3s; font-size: 16px; }
+        .btn-pay { background: var(--primary); }
+        .btn-comp { background: var(--secondary); }
+        .btn-admin { background: #555; margin-top: 30px; opacity: 0.6; font-size: 14px; }
+        
+        #adminDashboard { display: none; max-width: 1000px; margin: auto; }
+        .table-wrapper { width: 100%; overflow-x: auto; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; font-size: 13px; }
+        th, td { border: 1px solid #eee; padding: 10px; text-align: center; }
+        th { background: #333; color: white; }
+        
+        .month-highlight-btn { background: #e2136e; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 18px; margin: 20px auto; display: block; cursor: pointer; }
+        #passChangeSection { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; }
+        .toggle-pass-btn { background: #444; color: white; padding: 8px 15px; border-radius: 5px; font-size: 12px; cursor: pointer; border: none; margin-bottom: 10px; width: auto; }
+        #adminLogin { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="mainContainer">
+    <div class="header">
+        <h1>Am Internet</h1>
+        <p>দ্রুত গতির ইন্টারনেট সেবা ও নিরবচ্ছিন্ন সংযোগ নিশ্চিত করাই আমাদের লক্ষ্য। উন্নত কাস্টমার সাপোর্ট এবং সেরা গেমিং এক্সপেরিয়েন্স নিয়ে আমরা আছি আপনার পাশে।</p>
+    </div>
+
+    <div id="userPage">
+        <div class="card service-card">
+            <h3>📞 কাস্টমার সাপোর্ট</h3>
+            <button class="toggle-btn" onclick="toggleService()">সার্ভিস টিমের নম্বর দেখুন ▼</button>
+            <div id="serviceList">
+                <div class="service-item"><span>ইঞ্জিনিয়ার ১</span> <a href="tel:01308667489" class="call-btn">কল দিন</a></div>
+                <div class="service-item"><span>ইঞ্জিনিয়ার ২</span> <a href="tel:01308667487" class="call-btn">কল দিন</a></div>
+                <div class="service-item"><span>ইঞ্জিনিয়ার ৩</span> <a href="tel:01308667490" class="call-btn">কল দিন</a></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>💳 ইন্টারনেট বিল পে</h3>
+            <div class="warning-text">⚠️ সতর্কবার্তা: পার্সোনাল নম্বরে "Send Money" করুন এবং পেমেন্ট নম্বরে "Make Payment" করুন।</div>
+            <div class="payment-box">
+                <div class="pay-method">বিকাশ পার্সোনাল: <b>01918677744</b></div>
+                <div class="pay-method">বিকাশ পেমেন্ট: <b>01703134988</b></div>
+            </div>
+            <label>ইউজার আইডি (২৮ দিয়ে শুরু)</label>
+            <div class="id-hint">উদাহরণ: 28001</div>
+            <input type="number" id="payId" placeholder="28XXXX">
+            <label>মোবাইল নম্বর</label><input type="number" id="payPhone" placeholder="017XXXXXXXX">
+            <label>টাকার পরিমাণ</label><input type="number" id="payAmount" placeholder="৫০০">
+            <label>ট্রানজেকশন আইডি (TrxID)</label><input type="text" id="payTrx" placeholder="8N76VL...">
+            <button class="btn-pay" onclick="submitData('BILL')">পেমেন্ট তথ্য জমা দিন</button>
+        </div>
+
+        <div class="card complain-card">
+            <h3>⚠️ অভিযোগ বক্স</h3>
+            <button class="toggle-btn" onclick="toggleComplain()">অভিযোগ করতে চান? এখানে ক্লিক করুন ▼</button>
+            <div id="complainForm">
+                <label>ইউজার আইডি (২৮ দিয়ে শুরু)</label>
+                <input type="number" id="compName" placeholder="28XXXX">
+                <label>মোবাইল নম্বর</label><input type="number" id="compPhone" placeholder="01XXXXXXXXX">
+                <label>সমস্যার ধরন</label>
+                <select id="compType">
+                    <option>ইন্টারনেট চলে না</option><option>স্পিড অনেক কম</option><option>তার কাটা পড়েছে</option><option>অন্যান্য সমস্যা</option>
+                </select>
+                <label>বিস্তারিত</label><textarea id="compMsg" rows="2" placeholder="বিস্তারিত..."></textarea>
+                <button class="btn-comp" onclick="submitData('COMPLAIN')">অভিযোগ পাঠান</button>
+            </div>
+        </div>
+        <button class="btn-admin" onclick="showLogin()">🔐 অ্যাডমিন লগইন</button>
+    </div>
+
+    <div id="adminLogin" class="card">
+        <h3>অ্যাডমিন লগইন</h3>
+        <input type="text" id="adminUser" placeholder="Username">
+        <input type="password" id="adminPass" placeholder="Password">
+        <button class="btn-pay" onclick="checkLogin()">লগইন</button>
+    </div>
+</div>
+
+<div id="adminDashboard" style="padding: 10px;">
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h2>ম্যানেজমেন্ট প্যানেল</h2>
+        <button onclick="location.reload()" style="background:red; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer;">লগ আউট</button>
+    </div>
+    <button class="toggle-pass-btn" onclick="togglePassBox()">⚙️ পাসওয়ার্ড পরিবর্তন করুন</button>
+    <div id="passChangeSection">
+        <div style="display:flex; gap:10px; align-items: center;">
+            <input type="password" id="newPass" placeholder="নতুন পাসওয়ার্ড" style="padding:8px; margin:0; flex:1;">
+            <button onclick="changePassword()" style="margin:0; width:120px; background:var(--primary); padding:10px; font-size:14px;">সেভ করুন</button>
+        </div>
+    </div>
+    <button class="month-highlight-btn" id="currentMonthBtn" onclick="loadMonthData()">Loading...</button>
+    <div class="table-wrapper">
+        <table>
+            <thead><tr><th>তারিখ</th><th>আইডি</th><th>মোবাইল নম্বর</th><th>ধরন</th><th>টাকা/সমস্যা</th><th>TrxID/বিস্তারিত</th></tr></thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyCFBj-6URVjyCsO3ERZQGroPi1eWAUaV6M",
+        authDomain: "sallu-c83fa.firebaseapp.com",
+        databaseURL: "https://sallu-c83fa-default-rtdb.firebaseio.com",
+        projectId: "sallu-c83fa",
+        storageBucket: "sallu-c83fa.firebasestorage.app",
+        messagingSenderId: "631719412254",
+        appId: "1:631719412254:web:67b174371e595644a6e40f"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const curMonth = months[new Date().getMonth()];
+    
+    const tgToken = "7741891698:AAHaxBEa2_utaOzOPJdGUzOcOBnxzijfH8w";
+    const tgChatId = "7067123155";
+
+    function togglePassBox() {
+        const box = document.getElementById('passChangeSection');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function changePassword() {
+        const newPass = document.getElementById('newPass').value;
+        if(newPass.length < 4) return alert("কমপক্ষে ৪ অক্ষর দিন!");
+        db.ref("admin_config/pass").set(newPass).then(() => {
+            alert("পাসওয়ার্ড সেভ হয়েছে!");
+            togglePassBox();
+            document.getElementById('newPass').value = "";
+        });
+    }
+
+    function toggleService() {
+        var list = document.getElementById("serviceList");
+        var btn = document.querySelector(".service-card .toggle-btn");
+        if (list.style.display === "block") { list.style.display = "none"; btn.innerHTML = "সার্ভিস টিমের নম্বর দেখুন ▼"; }
+        else { list.style.display = "block"; btn.innerHTML = "নম্বরগুলো লুকিয়ে রাখুন ▲"; }
+    }
+
+    function toggleComplain() {
+        var form = document.getElementById("complainForm");
+        var btn = document.querySelector(".complain-card .toggle-btn");
+        if (form.style.display === "block") { form.style.display = "none"; btn.innerHTML = "অভিযোগ করতে চান? এখানে ক্লিক করুন ▼"; }
+        else { form.style.display = "block"; btn.innerHTML = "ফরমটি লুকিয়ে রাখুন ▲"; }
+    }
+
+    function submitData(type) {
+        let payload = { type: type, month: curMonth, time: new Date().toLocaleString() };
+        let tgMsg = "";
+        let inputId = "";
+
+        if(type === 'BILL') {
+            inputId = document.getElementById('payId').value;
+            payload.id = inputId;
+            payload.phone = document.getElementById('payPhone').value;
+            payload.amt = document.getElementById('payAmount').value;
+            payload.trx = document.getElementById('payTrx').value;
+            tgMsg = `💰 নতুন পেমেন্ট!\nআইডি: ${payload.id}\nমোবাইল: ${payload.phone}\nটাকা: ${payload.amt}\nTrxID: ${payload.trx}`;
+        } else {
+            inputId = document.getElementById('compName').value;
+            payload.id = inputId;
+            payload.phone = document.getElementById('compPhone').value;
+            payload.issue = document.getElementById('compType').value;
+            payload.msg = document.getElementById('compMsg').value;
+            tgMsg = `⚠️ নতুন অভিযোগ!\nআইডি: ${payload.id}\nমোবাইল: ${payload.phone}\nসমস্যা: ${payload.issue}\nবিস্তারিত: ${payload.msg}`;
+        }
+
+        if (!inputId.toString().startsWith("28")) {
+            return alert("ভুল আইডি! ইউজার আইডি অবশ্যই ২৮ (28) দিয়ে শুরু হতে হবে।");
+        }
+
+        if(!payload.id || !payload.phone) return alert("সব ঘর পূরণ করুন!");
+
+        db.ref("records").push().set(payload).then(() => { 
+            const url = `https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChatId}&text=${encodeURIComponent(tgMsg)}`;
+            fetch(url).then(() => {
+                if(type === 'COMPLAIN') {
+                    alert("আমাদের সার্ভিস প্রতিনিধি শীঘ্রই যোগাযোগ করবে আপনার সাথে");
+                } else {
+                    alert("পেমেন্ট তথ্য সফলভাবে জমা হয়েছে!");
+                }
+                location.reload(); 
+            }).catch(() => { location.reload(); });
+        });
+    }
+
+    function showLogin() { document.getElementById('userPage').style.display = 'none'; document.getElementById('adminLogin').style.display = 'block'; }
+
+    function checkLogin() {
+        const u = document.getElementById('adminUser').value;
+        const p = document.getElementById('adminPass').value;
+        db.ref("admin_config/pass").once("value").then((snap) => {
+            let correctPass = snap.val() || "Sallu12";
+            if(u === "Sallu" && p === correctPass) {
+                document.getElementById('mainContainer').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                document.getElementById('currentMonthBtn').innerText = "বর্তমান মাস: " + curMonth;
+                loadMonthData();
+            } else { alert("ভুল পাসওয়ার্ড!"); }
+        });
+    }
+
+    function loadMonthData() {
+        db.ref("records").orderByChild("month").equalTo(curMonth).on("value", (snap) => {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = "";
+            snap.forEach((child) => {
+                const d = child.val();
+                const tr = document.createElement("tr");
+                tr.style.background = d.type === 'BILL' ? '#f0fff4' : '#fff9f0';
+                tr.innerHTML = `<td>${d.time}</td><td><b>${d.id}</b></td><td>${d.phone}</td><td>${d.type}</td><td>${d.type === 'BILL' ? d.amt + ' TK' : d.issue}</td><td>${d.type === 'BILL' ? d.trx : d.msg}</td>`;
+                tbody.prepend(tr);
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

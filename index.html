@@ -68,6 +68,7 @@
         .btn-pay { background: var(--primary); }
         .btn-comp { background: var(--secondary); }
         .btn-admin { background: #555; margin-top: 30px; opacity: 0.6; font-size: 14px; }
+        .btn-status { background: #2196F3; margin-top: 10px; }
         #adminDashboard { display: none; max-width: 1200px; margin: auto; padding: 20px; }
         .table-wrapper { width: 100%; overflow-x: auto; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
         table { width: 100%; border-collapse: collapse; min-width: 800px; font-size: 13px; }
@@ -75,16 +76,253 @@
         th { background: #333; color: white; }
         #passChangeSection { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; }
         .toggle-pass-btn { background: #444; color: white; padding: 8px 15px; border-radius: 5px; font-size: 12px; cursor: pointer; border: none; margin-bottom: 10px; width: auto; }
-        .del-btn { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+        
+        /* Delete Button - সবার জন্য */
+        .del-btn { 
+            background: #ff4d4d !important; 
+            color: white !important; 
+            border: none !important; 
+            padding: 8px 15px !important; 
+            border-radius: 5px !important; 
+            cursor: pointer !important; 
+            font-size: 12px !important; 
+            font-weight: bold !important;
+            margin: 2px !important;
+            transition: 0.3s !important;
+            display: inline-block !important;
+            width: auto !important;
+        }
+        .del-btn:hover { background: #cc0000 !important; transform: translateY(-2px) !important; }
+        
+        /* Confirm/Reject Button Styles */
+        .btn-confirm { 
+            background: #4CAF50 !important; 
+            color: white !important; 
+            border: none !important; 
+            padding: 8px 15px !important; 
+            border-radius: 5px !important; 
+            cursor: pointer !important; 
+            font-size: 12px !important; 
+            font-weight: bold !important;
+            margin: 2px !important;
+            transition: 0.3s !important;
+            display: inline-block !important;
+            width: auto !important;
+        }
+        .btn-confirm:hover { background: #388E3C !important; transform: translateY(-2px) !important; }
+        
+        .btn-reject { 
+            background: #f44336 !important; 
+            color: white !important; 
+            border: none !important; 
+            padding: 8px 15px !important; 
+            border-radius: 5px !important; 
+            cursor: pointer !important; 
+            font-size: 12px !important; 
+            font-weight: bold !important;
+            margin: 2px !important;
+            transition: 0.3s !important;
+            display: inline-block !important;
+            width: auto !important;
+        }
+        .btn-reject:hover { background: #d32f2f !important; transform: translateY(-2px) !important; }
+        
+        /* Status Badges */
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .status-pending { 
+            background: #FFF3E0; 
+            color: #EF6C00; 
+            border: 1px solid #FF9800; 
+        }
+        .status-confirmed { 
+            background: #E8F5E9; 
+            color: #2E7D32; 
+            border: 1px solid #4CAF50; 
+        }
+        .status-rejected { 
+            background: #FFEBEE; 
+            color: #C62828; 
+            border: 1px solid #f44336; 
+        }
+        
+        /* Customer Status Card */
+        .status-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
         .section-title { background: #333; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px; text-align: center; }
-        .stats-summary { display: flex; gap: 15px; margin-bottom: 20px; justify-content: center; }
-        .stat-card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; flex: 1; border-bottom: 4px solid var(--primary); }
-        .stat-card span { display: block; font-size: 12px; color: #666; font-weight: bold; }
-        .stat-card b { font-size: 18px; color: var(--primary); }
+        
+        /* Stats Summary - TOTAL TK Box সহ */
+        .stats-summary { 
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            text-align: center; 
+            border-bottom: 4px solid var(--primary);
+            transition: 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stat-card.total-amount {
+            border-bottom: 4px solid #4CAF50;
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+        }
+        .stat-card span { 
+            display: block; 
+            font-size: 13px; 
+            color: #666; 
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .stat-card b { 
+            font-size: 22px; 
+            color: var(--primary);
+            display: block;
+        }
+        .stat-card.total-amount b {
+            color: #2E7D32;
+            font-size: 24px;
+        }
+        
+        /* Stats Dropdown Styles */
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px;
+            background: #333;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .stats-header h3 {
+            margin: 0;
+            color: white !important;
+            font-size: 16px;
+        }
+
+        .stats-toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: auto;
+            margin: 0;
+        }
+
+        .stats-container {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .stats-container.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .stats-container.expanded {
+            max-height: 1000px;
+            opacity: 1;
+            margin-bottom: 20px;
+        }
+        
         .search-container { margin-bottom: 20px; position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 10px 0; }
         #adminSearch { padding: 15px; border: 2px solid var(--primary); border-radius: 50px; font-weight: bold; }
         .month-select-container { text-align: center; margin: 20px 0; }
         #monthSelector { padding: 15px 30px; border-radius: 50px; background: var(--primary); color: white; border: none; font-size: 18px; font-weight: bold; cursor: pointer; outline: none; box-shadow: 0 4px 10px rgba(226, 19, 110, 0.3); }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .modal-title {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            font-weight: bold;
+        }
+        .modal-close:hover {
+            color: var(--primary);
+        }
+        
+        /* Action Buttons Container */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Complaint Table Action Buttons */
+        .comp-action-buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -103,16 +341,7 @@
     </div>
 
     <div id="userPage">
-        <div class="card service-card">
-            <h3>📞 কাস্টমার সাপোর্ট</h3>
-            <button class="toggle-btn" onclick="toggleService()">সার্ভিস টিমের নম্বর দেখুন ▼</button>
-            <div id="serviceList">
-                <div class="service-item"><span>ইঞ্জিনিয়ার ১রায়হান</span> <a href="tel:01308667489" class="call-btn">কল দিন</a></div>
-                <div class="service-item"><span>ইঞ্জিনিয়ার ২অলি</span> <a href="tel:01308667487" class="call-btn">কল দিন</a></div>
-                <div class="service-item"><span>ইঞ্জিনিয়ার ৩সাগর</span> <a href="tel:01308667490" class="call-btn">কল দিন</a></div>
-            </div>
-        </div>
-
+        <!-- Bill Payment Section - TOP -->
         <div class="card">
             <h3>💳 ইন্টারনেট বিল পে</h3>
             <div class="warning-text">⚠️ সতর্কবার্তা: নিচে থেকে কোন নম্বরে টাকা পাঠিয়েছেন সেটি অবশ্যই সিলেক্ট করুন।</div>
@@ -138,6 +367,32 @@
             <button class="btn-pay" onclick="submitData('BILL')">পেমেন্ট তথ্য জমা দিন</button>
         </div>
 
+        <!-- Payment Status Check -->
+        <div class="card">
+            <h3>📊 পেমেন্ট স্ট্যাটাস চেক</h3>
+            <label>আপনার ইউজার আইডি লিখুন</label>
+            <input type="number" id="statusCheckId" placeholder="28001" value="28">
+            <button class="btn-status" onclick="checkPaymentStatus()">
+                🔍 পেমেন্ট স্ট্যাটাস চেক করুন
+            </button>
+            
+            <div id="statusResult" style="display: none; margin-top: 20px;">
+                <!-- Status results will be shown here -->
+            </div>
+        </div>
+
+        <!-- Customer Support Section -->
+        <div class="card service-card">
+            <h3>📞 কাস্টমার সাপোর্ট</h3>
+            <button class="toggle-btn" onclick="toggleService()">সার্ভিস টিমের নম্বর দেখুন ▼</button>
+            <div id="serviceList">
+                <div class="service-item"><span>ইঞ্জিনিয়ার ১রায়হান</span> <a href="tel:01308667489" class="call-btn">কল দিন</a></div>
+                <div class="service-item"><span>ইঞ্জিনিয়ার ২অলি</span> <a href="tel:01308667487" class="call-btn">কল দিন</a></div>
+                <div class="service-item"><span>ইঞ্জিনিয়ার ৩সাগর</span> <a href="tel:01308667490" class="call-btn">কল দিন</a></div>
+            </div>
+        </div>
+
+        <!-- Complaint Box Section -->
         <div class="card complain-card">
             <h3>⚠️ অভিযোগ বক্স</h3>
             <button class="toggle-btn" onclick="toggleComplain()">অভিযোগ করতে চান? এখানে ক্লিক করুন ▼</button>
@@ -154,6 +409,8 @@
                 <button class="btn-comp" onclick="submitData('COMPLAIN')">অভিযোগ পাঠান</button>
             </div>
         </div>
+        
+        <!-- Admin Login Button -->
         <button class="btn-admin" onclick="showLogin()">🔐 অ্যাডমিন লগইন</button>
     </div>
 
@@ -165,6 +422,7 @@
     </div>
 </div>
 
+<!-- Admin Dashboard -->
 <div id="adminDashboard">
     <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
         <h2>ম্যানেজমেন্ট প্যানেল</h2>
@@ -184,14 +442,40 @@
         </select>
     </div>
 
-    <div class="stats-summary">
-        <div class="stat-card">
-            <span>মোট বিল সংখ্যা</span>
-            <b id="totalBillCount">0</b>
+    <!-- Stats Summary with Dropdown -->
+    <div style="margin-bottom: 20px;">
+        <div class="stats-header" onclick="toggleStats()">
+            <h3>📊 পরিসংখ্যান</h3>
+            <button class="stats-toggle-btn" id="statsToggleBtn">▼</button>
         </div>
-        <div class="stat-card">
-            <span>মোট আদায়কৃত টাকা</span>
-            <b id="totalBillAmount">0 TK</b>
+        
+        <div class="stats-container expanded" id="statsContainer">
+            <div class="stats-summary">
+                <div class="stat-card">
+                    <span>মোট বিল সংখ্যা</span>
+                    <b id="totalBillCount">0</b>
+                </div>
+                <div class="stat-card">
+                    <span>পেন্ডিং পেমেন্ট</span>
+                    <b id="pendingBillCount">0</b>
+                </div>
+                <div class="stat-card">
+                    <span>কনফার্মড পেমেন্ট</span>
+                    <b id="confirmedBillCount">0</b>
+                </div>
+                <div class="stat-card">
+                    <span>রিজেক্টেড পেমেন্ট</span>
+                    <b id="rejectedBillCount">0</b>
+                </div>
+                <div class="stat-card total-amount">
+                    <span>মোট আদায়কৃত টাকা</span>
+                    <b id="totalAmount">0 TK</b>
+                </div>
+                <div class="stat-card" style="border-bottom-color: #2196F3;">
+                    <span>মোট অভিযোগ</span>
+                    <b id="totalComplaints">0</b>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -202,21 +486,111 @@
     <h3 class="section-title">💳 বিল পেমেন্ট তালিকা</h3>
     <div class="table-wrapper">
         <table>
-            <thead><tr><th>তারিখ</th><th>ইউজার আইডি</th><th>মোবাইল নম্বর</th><th>পেমেন্ট নম্বর</th><th>টাকার পরিমাণ</th><th>TrxID</th><th>অ্যাকশন</th></tr></thead>
-            <tbody id="billTableBody"></tbody>
+            <thead>
+                <tr>
+                    <th>তারিখ</th>
+                    <th>ইউজার আইডি</th>
+                    <th>মোবাইল নম্বর</th>
+                    <th>পেমেন্ট নম্বর</th>
+                    <th>টাকার পরিমাণ</th>
+                    <th>TrxID</th>
+                    <th>স্ট্যাটাস</th>
+                    <th>অ্যাকশন</th>
+                </tr>
+            </thead>
+            <tbody id="billTableBody">
+                <!-- Payment data will be loaded here -->
+            </tbody>
         </table>
     </div>
 
     <h3 class="section-title">⚠️ অভিযোগ তালিকা</h3>
     <div class="table-wrapper">
         <table>
-            <thead><tr><th>তারিখ</th><th>ইউজার আইডি</th><th>মোাবাইল নম্বর</th><th>সমস্যার ধরন</th><th>বিস্তারিত তথ্য</th><th>অ্যাকশন</th></tr></thead>
-            <tbody id="compTableBody"></tbody>
+            <thead>
+                <tr>
+                    <th>তারিখ</th>
+                    <th>ইউজার আইডি</th>
+                    <th>মোবাইল নম্বর</th>
+                    <th>সমস্যার ধরন</th>
+                    <th>বিস্তারিত তথ্য</th>
+                    <th>অ্যাকশন</th>
+                </tr>
+            </thead>
+            <tbody id="compTableBody">
+                <!-- Complaint data will be loaded here -->
+            </tbody>
         </table>
     </div>
 </div>
 
+<!-- Verify Modal -->
+<div id="verifyModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeVerifyModal()">&times;</span>
+        <div class="modal-title">পেমেন্ট ভেরিফিকেশন</div>
+        <div style="margin: 20px 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span><strong>ইউজার আইডি:</strong></span>
+                <span id="verifyUserId"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span><strong>TrxID:</strong></span>
+                <span id="verifyTrxId" style="font-family: monospace;"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span><strong>টাকার পরিমাণ:</strong></span>
+                <span id="verifyAmount" style="color: var(--primary); font-weight: bold;"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span><strong>মোবাইল:</strong></span>
+                <span id="verifyPhone"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span><strong>পেমেন্ট নম্বর:</strong></span>
+                <span id="verifyMethod"></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span><strong>জমা দেওয়ার সময়:</strong></span>
+                <span id="verifyTime"></span>
+            </div>
+        </div>
+        <div style="margin-top: 25px;">
+            <button class="btn-confirm" onclick="confirmPayment()" style="width: 100%; padding: 12px; font-size: 16px; background: #4CAF50 !important;">
+                ✅ কনফার্ম করুন
+            </button>
+            <button class="btn-reject" onclick="showRejectReason()" style="width: 100%; padding: 12px; font-size: 16px; margin-top: 10px; background: #f44336 !important;">
+                ❌ রিজেক্ট করুন
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Reject Reason Modal -->
+<div id="rejectModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeRejectModal()">&times;</span>
+        <div class="modal-title">রিজেক্ট করার কারণ</div>
+        <div style="margin: 20px 0;">
+            <select id="rejectReason" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+                <option value="ভুল TrxID">ভুল TrxID</option>
+                <option value="টাকা প্রাপ্তি হয়নি">টাকা প্রাপ্তি হয়নি</option>
+                <option value="ভুল ইউজার আইডি">ভুল ইউজার আইডি</option>
+                <option value="ডুপ্লিকেট পেমেন্ট">ডুপ্লিকেট পেমেন্ট</option>
+                <option value="অন্যান্য">অন্যান্য</option>
+            </select>
+            <textarea id="customReason" placeholder="অন্যান্য কারণ লিখুন..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; display: none; min-height: 80px;"></textarea>
+        </div>
+        <div>
+            <button class="btn-reject" onclick="submitReject()" style="width: 100%; padding: 12px; font-size: 16px; background: #f44336 !important;">
+                রিজেক্ট সাবমিট করুন
+            </button>
+        </div>
+    </div>
+</div>
+
 <script>
+    // Firebase Configuration
     const firebaseConfig = {
         apiKey: "AIzaSyCFBj-6URVjyCsO3ERZQGroPi1eWAUaV6M",
         authDomain: "sallu-c83fa.firebaseapp.com",
@@ -227,9 +601,15 @@
         appId: "1:631719412254:web:67b174371e595644a6e40f"
     };
 
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     
+    // Global Variables
+    let currentPaymentKey = null;
+    let currentPaymentData = null;
+    
+    // Live Clock Function
     function updateClock() {
         const now = new Date();
         const timeBN = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
@@ -253,11 +633,37 @@
     const tgToken = "7741891698:AAHaxBEa2_utaOzOPJdGUzOcOBnxzijfH8w";
     const tgChatId = "7067123155";
 
-    function togglePassBox() { const box = document.getElementById('passChangeSection'); box.style.display = (box.style.display === 'block') ? 'none' : 'block'; }
-    function changePassword() { const newPass = document.getElementById('newPass').value; if(newPass.length < 4) return alert("কমপক্ষে ৪ অক্ষর দিন!"); db.ref("admin_config/pass").set(newPass).then(() => { alert("পাসওয়ার্ড সেভ হয়েছে!"); togglePassBox(); document.getElementById('newPass').value = ""; }); }
-    function toggleService() { var list = document.getElementById("serviceList"); var btn = document.querySelector(".service-card .toggle-btn"); if (list.style.display === "block") { list.style.display = "none"; btn.innerHTML = "সার্ভিস টিমের নম্বর দেখুন ▼"; } else { list.style.display = "block"; btn.innerHTML = "নম্বরগুলো লুকিয়ে রাখুন ▲"; } }
-    function toggleComplain() { var form = document.getElementById("complainForm"); var btn = document.querySelector(".complain-card .toggle-btn"); if (form.style.display === "block") { form.style.display = "none"; btn.innerHTML = "অভিযোগ করতে চান? এখানে ক্লিক করুন ▼"; } else { form.style.display = "block"; btn.innerHTML = "ফরমটি লুকিয়ে রাখুন ▲"; } }
+    // Toggle Functions
+    function togglePassBox() { 
+        const box = document.getElementById('passChangeSection'); 
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block'; 
+    }
+    
+    function toggleService() { 
+        var list = document.getElementById("serviceList"); 
+        var btn = document.querySelector(".service-card .toggle-btn"); 
+        if (list.style.display === "block") { 
+            list.style.display = "none"; 
+            btn.innerHTML = "সার্ভিস টিমের নম্বর দেখুন ▼"; 
+        } else { 
+            list.style.display = "block"; 
+            btn.innerHTML = "নম্বরগুলো লুকিয়ে রাখুন ▲"; 
+        } 
+    }
+    
+    function toggleComplain() { 
+        var form = document.getElementById("complainForm"); 
+        var btn = document.querySelector(".complain-card .toggle-btn"); 
+        if (form.style.display === "block") { 
+            form.style.display = "none"; 
+            btn.innerHTML = "অভিযোগ করতে চান? এখানে ক্লিক করুন ▼"; 
+        } else { 
+            form.style.display = "block"; 
+            btn.innerHTML = "ফরমটি লুকিয়ে রাখুন ▲"; 
+        } 
+    }
 
+    // Submit Payment/Complaint Data
     function submitData(type) {
         const inputId = (type === 'BILL') ? document.getElementById('payId').value : document.getElementById('compName').value;
         const phoneNum = (type === 'BILL') ? document.getElementById('payPhone').value : document.getElementById('compPhone').value;
@@ -270,33 +676,168 @@
             const methodValue = methodEl.value;
 
             if(!inputId || !phoneNum || !amt || !trx) return alert("সব ঘর পূরণ করুন!");
-            if (inputId.length !== 5 || !inputId.startsWith("28")) return alert("ভুল আইডি!");
-            if (phoneNum.length !== 11) return alert("ভুল মোবাইল নম্বর!");
+            if (inputId.length !== 5 || !inputId.startsWith("28")) return alert("ভুল আইডি! আইডি ৫ ডিজিট এবং ২৮ দিয়ে শুরু হতে হবে");
+            if (phoneNum.length !== 11) return alert("ভুল মোবাইল নম্বর! ১১ ডিজিট হতে হবে");
 
-            let payload = { type: type, month: curMonthYear, time: new Date().toLocaleString(), id: inputId, phone: phoneNum, amt: amt, trx: trx, method: methodValue };
-            let tgMsg = `💰 নতুন পেমেন্ট!\n━━━━━━━━━━━━━\n👤 আইডি: ${payload.id}\n💵 টাকা: ${payload.amt} TK\n🧾 TrxID: ${payload.trx}\n📲 পেমেন্ট নম্বর: ${payload.method}\n📞 মোবাইল: ${payload.phone}`;
+            // Add status field to payload
+            let payload = { 
+                type: type, 
+                month: curMonthYear, 
+                time: new Date().toLocaleString('bn-BD'), 
+                id: inputId, 
+                phone: phoneNum, 
+                amt: amt, 
+                trx: trx, 
+                method: methodValue,
+                status: "pending", // New field
+                timestamp: Date.now() // Timestamp
+            };
+            
+            let tgMsg = `💰 নতুন পেমেন্ট!\n━━━━━━━━━━━━━\n👤 আইডি: ${payload.id}\n💵 টাকা: ${payload.amt} TK\n🧾 TrxID: ${payload.trx}\n📲 পেমেন্ট নম্বর: ${payload.method}\n📞 মোবাইল: ${payload.phone}\n🔄 স্ট্যাটাস: পেন্ডিং`;
 
             db.ref("records").push().set(payload).then(() => { 
                 fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChatId}&text=${encodeURIComponent(tgMsg)}`)
-                .then(() => { alert("সফল হয়েছে!"); location.reload(); });
+                .then(() => { 
+                    alert("✅ পেমেন্ট তথ্য সফলভাবে জমা দেওয়া হয়েছে!\n\nআপনার পেমেন্ট স্ট্যাটাস চেক করতে 'পেমেন্ট স্ট্যাটাস চেক' ব্যবহার করুন।"); 
+                    // Clear form
+                    document.getElementById('payPhone').value = '';
+                    document.getElementById('payAmount').value = '';
+                    document.getElementById('payTrx').value = '';
+                });
             });
         } else {
             const msg = document.getElementById('compMsg').value;
             if(!inputId || !phoneNum || !msg) return alert("সব ঘর পূরণ করুন!");
-            if (inputId.length !== 5 || !inputId.startsWith("28")) return alert("ভুল আইডি!");
-            if (phoneNum.length !== 11) return alert("ভুল মোবাইল নম্বর!");
+            if (inputId.length !== 5 || !inputId.startsWith("28")) return alert("ভুল আইডি! আইডি ৫ ডিজিট এবং ২৮ দিয়ে শুরু হতে হবে");
+            if (phoneNum.length !== 11) return alert("ভুল মোবাইল নম্বর! ১১ ডিজিট হতে হবে");
 
-            let payload = { type: type, month: curMonthYear, time: new Date().toLocaleString(), id: inputId, phone: phoneNum, issue: document.getElementById('compType').value, msg: msg };
+            let payload = { 
+                type: type, 
+                month: curMonthYear, 
+                time: new Date().toLocaleString('bn-BD'), 
+                id: inputId, 
+                phone: phoneNum, 
+                issue: document.getElementById('compType').value, 
+                msg: msg 
+            };
+            
             let tgMsg = `⚠️ নতুন অভিযোগ!\n━━━━━━━━━━━━━\n👤 আইডি: ${payload.id}\n📞 মোবাইল: ${payload.phone}\n❓ সমস্যা: ${payload.issue}\n📝 বিস্তারিত: ${payload.msg}`;
 
             db.ref("records").push().set(payload).then(() => { 
                 fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChatId}&text=${encodeURIComponent(tgMsg)}`)
-                .then(() => { alert("শীঘ্রই আমাদের সার্ভিস প্রতিনিধি আপনার সাথে যোগাযোগ করবে"); location.reload(); });
+                .then(() => { 
+                    alert("✅ অভিযোগ সফলভাবে জমা দেওয়া হয়েছে!শিগ্রই আমাদের সার্ভিস প্রতিনিধি আপনার সাথে যোগাযোগ করবে"); 
+                    // Clear form
+                    document.getElementById('compPhone').value = '';
+                    document.getElementById('compMsg').value = '';
+                });
             });
         }
     }
 
-    function showLogin() { document.getElementById('userPage').style.display = 'none'; document.getElementById('adminLogin').style.display = 'block'; }
+    // কাস্টমার পেমেন্ট স্ট্যাটাস চেক ফাংশন
+    function checkPaymentStatus() {
+        const userId = document.getElementById('statusCheckId').value;
+        if(!userId || userId.length !== 5) {
+            alert("দয়া করে একটি বৈধ ৫ ডিজিটের ইউজার আইডি লিখুন!");
+            return;
+        }
+        
+        const statusResult = document.getElementById('statusResult');
+        statusResult.innerHTML = '<div style="text-align: center; padding: 20px;"><i>লোড হচ্ছে...</i></div>';
+        statusResult.style.display = 'block';
+        
+        db.ref("records").orderByChild("id").equalTo(userId).once("value", (snap) => {
+            if(!snap.exists()) {
+                statusResult.innerHTML = `
+                    <div style="background: #ffebee; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4 style="color: #c62828;">পেমেন্ট পাওয়া যায়নি</h4>
+                        <p>এই আইডির কোনো পেমেন্ট তথ্য পাওয়া যায়নি।</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div style="max-height: 300px; overflow-y: auto;">';
+            let hasPayments = false;
+            
+            snap.forEach((child) => {
+                const data = child.val();
+                if(data.type === 'BILL') {
+                    hasPayments = true;
+                    
+                    let statusText = "";
+                    let statusClass = "";
+                    let statusIcon = "";
+                    
+                    if(data.status === "pending") {
+                        statusText = "পেন্ডিং";
+                        statusClass = "status-pending";
+                        statusIcon = "⏳";
+                    } else if(data.status === "confirmed") {
+                        statusText = "কনফার্মড";
+                        statusClass = "status-confirmed";
+                        statusIcon = "✅";
+                    } else if(data.status === "rejected") {
+                        statusText = "রিজেক্টেড";
+                        statusClass = "status-rejected";
+                        statusIcon = "❌";
+                    } else {
+                        statusText = "পেন্ডিং";
+                        statusClass = "status-pending";
+                        statusIcon = "⏳";
+                    }
+                    
+                    html += `
+                        <div class="status-card">
+                            <div class="status-item">
+                                <span>TrxID:</span>
+                                <span><strong>${data.trx || 'N/A'}</strong></span>
+                            </div>
+                            <div class="status-item">
+                                <span>টাকার পরিমাণ:</span>
+                                <span><strong>${data.amt} TK</strong></span>
+                            </div>
+                            <div class="status-item">
+                                <span>পেমেন্ট নম্বর:</span>
+                                <span>${data.method || 'N/A'}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>জমা দেওয়ার তারিখ:</span>
+                                <span>${data.time}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>স্ট্যাটাস:</span>
+                                <span class="status-badge ${statusClass}">${statusIcon} ${statusText}</span>
+                            </div>
+                            ${data.verifiedAt ? `<div class="status-item"><span>ভেরিফাইড তারিখ:</span><span>${data.verifiedAt}</span></div>` : ''}
+                            ${data.rejectReason ? `<div class="status-item"><span>রিজেক্ট কারণ:</span><span style="color: #f44336;">${data.rejectReason}</span></div>` : ''}
+                        </div>
+                    `;
+                }
+            });
+            
+            html += '</div>';
+            
+            if(!hasPayments) {
+                html = `
+                    <div style="background: #fff3e0; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h4 style="color: #ef6c00;">পেমেন্ট নেই</h4>
+                        <p>এই আইডির কোনো পেমেন্ট তথ্য পাওয়া যায়নি।</p>
+                    </div>
+                `;
+            }
+            
+            statusResult.innerHTML = html;
+        });
+    }
+
+    // Admin Login
+    function showLogin() { 
+        document.getElementById('userPage').style.display = 'none'; 
+        document.getElementById('adminLogin').style.display = 'block'; 
+    }
+    
     function checkLogin() {
         const u = document.getElementById('adminUser').value;
         const p = document.getElementById('adminPass').value;
@@ -305,12 +846,25 @@
                 document.getElementById('mainContainer').style.display = 'none';
                 document.getElementById('adminDashboard').style.display = 'block';
                 initMonthSelector();
-            } else { alert("ভুল!"); }
+            } else { 
+                alert("ভুল ইউজারনেম বা পাসওয়ার্ড!"); 
+            }
         });
     }
+    
+    function changePassword() { 
+        const newPass = document.getElementById('newPass').value; 
+        if(newPass.length < 4) return alert("কমপক্ষে ৪ অক্ষর দিন!"); 
+        db.ref("admin_config/pass").set(newPass).then(() => { 
+            alert("পাসওয়ার্ড সেভ হয়েছে!"); 
+            togglePassBox(); 
+            document.getElementById('newPass').value = ""; 
+        }); 
+    }
+    
     function initMonthSelector() {
         const selector = document.getElementById('monthSelector');
-        selector.innerHTML = "<option value='ALL'>All Data</option>";
+        selector.innerHTML = "<option value='ALL'>সকল ডেটা দেখুন</option>";
         monthNamesEN.forEach(m => {
             let mY = m + " " + new Date().getFullYear();
             let opt = document.createElement('option');
@@ -320,36 +874,347 @@
         });
         loadMonthData();
     }
+    
     function filterData() {
         let input = document.getElementById('adminSearch').value.toLowerCase();
-        let trs = document.querySelectorAll("tbody tr");
+        let trs = document.querySelectorAll("#billTableBody tr, #compTableBody tr");
         trs.forEach(tr => tr.style.display = tr.textContent.toLowerCase().includes(input) ? "" : "none");
     }
-    function deleteRecord(key) { if(confirm("ডিলিট?")) db.ref("records/" + key).remove(); }
+    
+    // ✅ Delete Record Function - সবার জন্য
+    function deleteRecord(key, type = 'bill') {
+        if(confirm(`আপনি কি এই ${type === 'bill' ? 'পেমেন্ট' : 'অভিযোগ'} রেকর্ডটি ডিলিট করতে চান?`)) {
+            db.ref("records/" + key).remove().then(() => {
+                alert("✅ রেকর্ড সফলভাবে ডিলিট হয়েছে!");
+                loadMonthData();
+            }).catch(error => {
+                alert("ডিলিট করতে সমস্যা হয়েছে: " + error.message);
+            });
+        }
+    }
+    
+    // ✅ পেমেন্ট ভেরিফাই মডাল ওপেন
+    function verifyPayment(key) {
+        console.log("verifyPayment called with key:", key);
+        
+        db.ref("records/" + key).once("value", (snap) => {
+            if(!snap.exists()) {
+                alert("Payment not found in database!");
+                return;
+            }
+            
+            const data = snap.val();
+            console.log("Payment data found:", data);
+            
+            currentPaymentKey = key;
+            currentPaymentData = data;
+            
+            document.getElementById('verifyUserId').textContent = data.id || "N/A";
+            document.getElementById('verifyTrxId').textContent = data.trx || "N/A";
+            document.getElementById('verifyAmount').textContent = (data.amt || "0") + " TK";
+            document.getElementById('verifyPhone').textContent = data.phone || "N/A";
+            document.getElementById('verifyMethod').textContent = data.method || "N/A";
+            document.getElementById('verifyTime').textContent = data.time || "N/A";
+            
+            document.getElementById('verifyModal').style.display = 'flex';
+        }).catch(error => {
+            console.error("Error loading payment:", error);
+            alert("Error loading payment: " + error.message);
+        });
+    }
+    
+    function closeVerifyModal() {
+        document.getElementById('verifyModal').style.display = 'none';
+        currentPaymentKey = null;
+        currentPaymentData = null;
+    }
+    
+    // ✅ পেমেন্ট কনফার্ম করুন
+    function confirmPayment() {
+        console.log("confirmPayment called, currentPaymentKey:", currentPaymentKey);
+        
+        if(!currentPaymentKey) {
+            alert("Error: No payment selected!");
+            return;
+        }
+        
+        if(confirm("আপনি কি এই পেমেন্টটি কনফার্ম করতে চান?")) {
+            const updates = {
+                status: "confirmed",
+                verifiedAt: new Date().toLocaleString('bn-BD'),
+                verifiedBy: "Admin",
+                verifiedTime: Date.now()
+            };
+            
+            db.ref("records/" + currentPaymentKey).update(updates).then(() => {
+                alert("✅ পেমেন্ট সফলভাবে কনফার্ম হয়েছে!");
+                
+                // টেলিগ্রাম নোটিফিকেশন
+                const tgMsg = `✅ পেমেন্ট কনফার্ম!\n━━━━━━━━━━━━━\n👤 আইডি: ${currentPaymentData.id}\n💵 টাকা: ${currentPaymentData.amt} TK\n🧾 TrxID: ${currentPaymentData.trx}\n📞 মোবাইল: ${currentPaymentData.phone}\n✅ ভেরিফাইড বাই: Admin`;
+                fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChatId}&text=${encodeURIComponent(tgMsg)}`);
+                
+                closeVerifyModal();
+                loadMonthData(); // Reload data
+            }).catch((error) => {
+                console.error("Error confirming payment:", error);
+                alert("Error: " + error.message);
+            });
+        }
+    }
+    
+    // ❌ রিজেক্ট কারণ দেখান
+    function showRejectReason() {
+        console.log("showRejectReason called, currentPaymentKey:", currentPaymentKey);
+        
+        if(!currentPaymentKey) {
+            alert("Error: No payment selected!");
+            return;
+        }
+        
+        document.getElementById('verifyModal').style.display = 'none';
+        document.getElementById('rejectModal').style.display = 'flex';
+        
+        // Reset custom reason field
+        document.getElementById('customReason').style.display = 'none';
+        document.getElementById('customReason').value = '';
+        
+        // Custom reason show/hide
+        const rejectReasonSelect = document.getElementById('rejectReason');
+        rejectReasonSelect.value = "ভুল TrxID"; // Reset to default
+        
+        // Remove any existing event listener
+        const newRejectReasonSelect = rejectReasonSelect.cloneNode(true);
+        rejectReasonSelect.parentNode.replaceChild(newRejectReasonSelect, rejectReasonSelect);
+        
+        // Add new event listener
+        document.getElementById('rejectReason').addEventListener('change', function() {
+            if(this.value === 'অন্যান্য') {
+                document.getElementById('customReason').style.display = 'block';
+            } else {
+                document.getElementById('customReason').style.display = 'none';
+            }
+        });
+    }
+    
+    function closeRejectModal() {
+        document.getElementById('rejectModal').style.display = 'none';
+        document.getElementById('verifyModal').style.display = 'none';
+        currentPaymentKey = null;
+        currentPaymentData = null;
+    }
+    
+    // ❌ পেমেন্ট রিজেক্ট করুন
+    function submitReject() {
+        console.log("submitReject called, currentPaymentKey:", currentPaymentKey);
+        
+        if(!currentPaymentKey) {
+            alert("Error: No payment selected!");
+            return;
+        }
+        
+        let reason = document.getElementById('rejectReason').value;
+        if(reason === 'অন্যান্য') {
+            reason = document.getElementById('customReason').value;
+            if(!reason.trim()) {
+                alert("অনুগ্রহ করে কারণ লিখুন!");
+                return;
+            }
+        }
+        
+        if(confirm("আপনি কি এই পেমেন্টটি রিজেক্ট করতে চান?")) {
+            const updates = {
+                status: "rejected",
+                rejectedAt: new Date().toLocaleString('bn-BD'),
+                rejectedBy: "Admin",
+                rejectReason: reason,
+                rejectedTime: Date.now()
+            };
+            
+            db.ref("records/" + currentPaymentKey).update(updates).then(() => {
+                alert("✅ পেমেন্ট সফলভাবে রিজেক্ট হয়েছে!");
+                
+                // টেলিগ্রাম নোটিফিকেশন
+                const tgMsg = `❌ পেমেন্ট রিজেক্ট!\n━━━━━━━━━━━━━\n👤 আইডি: ${currentPaymentData.id}\n💵 টাকা: ${currentPaymentData.amt} TK\n🧾 TrxID: ${currentPaymentData.trx}\n📞 মোবাইল: ${currentPaymentData.phone}\n❌ কারণ: ${reason}`;
+                fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChatId}&text=${encodeURIComponent(tgMsg)}`);
+                
+                closeRejectModal();
+                loadMonthData(); // Reload data
+            }).catch((error) => {
+                console.error("Error rejecting payment:", error);
+                alert("Error: " + error.message);
+            });
+        }
+    }
+    
+    // ✅ ডেটা লোড করুন
     function loadMonthData() {
         const selectedMonth = document.getElementById('monthSelector').value;
         let query = db.ref("records");
         if (selectedMonth !== "ALL") query = query.orderByChild("month").equalTo(selectedMonth);
-        query.on("value", (snap) => {
+        
+        query.once("value", (snap) => {
             document.getElementById('billTableBody').innerHTML = "";
             document.getElementById('compTableBody').innerHTML = "";
-            let count = 0, total = 0;
+            
+            let count = 0, pending = 0, confirmed = 0, rejected = 0, totalAmount = 0, totalComplaints = 0;
+            let billData = [];
+            
             snap.forEach((child) => {
                 const d = child.val();
+                const key = child.key;
+                
                 if(d.type === 'BILL') {
-                    count++; total += Number(d.amt);
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `<td>${d.time}</td><td>${d.id}</td><td>${d.phone}</td><td>${d.method || '-'}</td><td>${d.amt} TK</td><td>${d.trx}</td><td><button class="del-btn" onclick="deleteRecord('${child.key}')">ডিলিট</button></td>`;
-                    document.getElementById('billTableBody').prepend(tr);
+                    billData.push({key: key, data: d});
+                    count++;
+                    
+                    // Calculate total confirmed amount
+                    if(d.status === "confirmed") {
+                        totalAmount += parseFloat(d.amt) || 0;
+                    }
+                    
+                    // Count status
+                    if(d.status === "pending") pending++;
+                    else if(d.status === "confirmed") confirmed++;
+                    else if(d.status === "rejected") rejected++;
+                    else pending++; // যদি status না থাকে
                 } else {
+                    totalComplaints++;
+                    
+                    // Complaint row with DELETE button
                     const tr = document.createElement("tr");
-                    tr.innerHTML = `<td>${d.time}</td><td>${d.id}</td><td>${d.phone}</td><td>${d.issue}</td><td>${d.msg}</td><td><button class="del-btn" onclick="deleteRecord('${child.key}')">ডিলিট</button></td>`;
+                    tr.innerHTML = `
+                        <td>${d.time}</td>
+                        <td>${d.id}</td>
+                        <td>${d.phone}</td>
+                        <td>${d.issue}</td>
+                        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${d.msg}</td>
+                        <td>
+                            <div class="comp-action-buttons">
+                                <button class="del-btn" onclick="deleteRecord('${key}', 'complaint')">
+                                    🗑️ ডিলিট
+                                </button>
+                            </div>
+                        </td>
+                    `;
                     document.getElementById('compTableBody').prepend(tr);
                 }
             });
+            
+            // Sort by timestamp (newest first)
+            billData.sort((a, b) => (b.data.timestamp || 0) - (a.data.timestamp || 0));
+            
+            // Process bill data
+            billData.forEach(item => {
+                const d = item.data;
+                const key = item.key;
+                
+                let statusBadge = "";
+                if(d.status === "pending") {
+                    statusBadge = '<span class="status-badge status-pending">⏳ পেন্ডিং</span>';
+                } else if(d.status === "confirmed") {
+                    statusBadge = '<span class="status-badge status-confirmed">✅ কনফার্মড</span>';
+                } else if(d.status === "rejected") {
+                    statusBadge = '<span class="status-badge status-rejected">❌ রিজেক্টেড</span>';
+                } else {
+                    statusBadge = '<span class="status-badge status-pending">⏳ পেন্ডিং</span>';
+                }
+                
+                // ✅ অ্যাকশন বাটন - সব স্ট্যাটাসের জন্য DELETE button
+                let actionButtons = "";
+                if(!d.status || d.status === "pending") {
+                    actionButtons = `
+                        <div class="action-buttons">
+                            <button class="btn-confirm" onclick="verifyPayment('${key}')">
+                                ✅ Confirm
+                            </button>
+                            <button class="del-btn" onclick="deleteRecord('${key}', 'bill')">
+                                🗑️ Delete
+                            </button>
+                        </div>
+                    `;
+                } else if(d.status === "confirmed") {
+                    actionButtons = `
+                        <div class="action-buttons">
+                            <span style="color: #4CAF50; font-weight: bold; margin-right: 10px;">
+                                ✅ Confirmed
+                            </span>
+                            <button class="del-btn" onclick="deleteRecord('${key}', 'bill')">
+                                🗑️ Delete
+                            </button>
+                        </div>
+                    `;
+                } else if(d.status === "rejected") {
+                    actionButtons = `
+                        <div class="action-buttons">
+                            <span style="color: #f44336; font-weight: bold; margin-right: 10px;">
+                                ❌ Rejected
+                            </span>
+                            <button class="del-btn" onclick="deleteRecord('${key}', 'bill')">
+                                🗑️ Delete
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${d.time}</td>
+                    <td><strong>${d.id}</strong></td>
+                    <td>${d.phone}</td>
+                    <td>${d.method || '-'}</td>
+                    <td>${d.amt} TK</td>
+                    <td><code style="font-size: 11px;">${d.trx}</code></td>
+                    <td>${statusBadge}</td>
+                    <td>${actionButtons}</td>
+                `;
+                document.getElementById('billTableBody').appendChild(tr);
+            });
+            
+            // Update stats boxes
             document.getElementById('totalBillCount').innerText = count;
-            document.getElementById('totalBillAmount').innerText = total + " TK";
+            document.getElementById('pendingBillCount').innerText = pending;
+            document.getElementById('confirmedBillCount').innerText = confirmed;
+            document.getElementById('rejectedBillCount').innerText = rejected;
+            document.getElementById('totalAmount').innerText = totalAmount.toLocaleString() + " TK";
+            document.getElementById('totalComplaints').innerText = totalComplaints;
+            
+            // If no data
+            if(count === 0 && totalComplaints === 0) {
+                document.getElementById('billTableBody').innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 50px; color: #999;">
+                            কোন ডেটা নেই
+                        </td>
+                    </tr>
+                `;
+                document.getElementById('compTableBody').innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 50px; color: #999;">
+                            কোন অভিযোগ ডেটা নেই
+                        </td>
+                    </tr>
+                `;
+            }
+        }).catch(error => {
+            console.error("Error loading data:", error);
+            alert("Error loading data: " + error.message);
         });
+    }
+
+    // Toggle Stats Section
+    function toggleStats() {
+        const container = document.getElementById('statsContainer');
+        const button = document.getElementById('statsToggleBtn');
+        
+        if(container.classList.contains('expanded')) {
+            container.classList.remove('expanded');
+            container.classList.add('collapsed');
+            button.textContent = '▶';
+        } else {
+            container.classList.remove('collapsed');
+            container.classList.add('expanded');
+            button.textContent = '▼';
+        }
     }
 </script>
 </body>
